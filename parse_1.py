@@ -1,10 +1,14 @@
 import json
 import requests
 import bs4
+import logging
+
 
 from tqdm import tqdm
 from fake_useragent import UserAgent
 from dateparser import parse
+
+logging.basicConfig(level=logging.DEBUG)
 
 url = "https://kam-pod.gov.ua/novini/town-news"
 
@@ -35,7 +39,7 @@ def prepare_page_param(page_number: int):
 
 news_list = []
 start_page = 1
-last_page = 10
+last_page = int(input("Enter the number of pages for parser:"))
 
 for page in tqdm(range(start_page, last_page + 1)):
     response = session.get(url,
